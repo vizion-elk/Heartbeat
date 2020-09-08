@@ -8,7 +8,7 @@ if($principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) 
 
     "`nYou are running Powershell with full privilege`n"
 
-    Set-Location -Path 'c:\Heartbeat-master\heartbeat'
+    Set-Location -Path 'c:\Heartbeat-6.5.4\heartbeat'
     Set-ExecutionPolicy Unrestricted
     
     "Heartbeat Execution policy set - Success`n"

@@ -8,7 +8,7 @@ if($principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) 
     Set-ExecutionPolicy Unrestricted
 
     #Change Directory to Heartbeat
-    Set-Location -Path 'c:\Heartbeat-master\heartbeat'
+    Set-Location -Path 'c:\Heartbeat-6.5.4\heartbeat'
 
     #Stops heartbeat from running
     Stop-Service -Force heartbeat
@@ -21,7 +21,7 @@ if($principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) 
 
     "`nUninstalling Heartbeat Now..."
 
-    $Target = "C:\Heartbeat-master"
+    $Target = "C:\Heartbeat-6.5.4"
 
     Get-ChildItem -Path $Target -Recurse -force |
         Where-Object { -not ($_.pscontainer)} |
