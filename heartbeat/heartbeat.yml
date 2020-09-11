@@ -146,3 +146,10 @@ processors:
 
 # This allows to enable 6.7 migration aliases
 #migration.6_to_7.enabled: true
+
+
+# Even if you use the OSS version, Beats might check for a proprietary plugin 
+# on the Elasticsearch server and throw an error during setup. 
+# To disable the check, try adding these settings:
+setup.ilm.enabled: false
+setup.ilm.check_exists: false
