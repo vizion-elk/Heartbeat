@@ -143,7 +143,7 @@ if($principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) 
 
     (Get-Content heartbeat.yml) |
         ForEach-Object {$_ -Replace 'heartbeat-url', "$($objTextBox5.Text)"} |
-            Set-Content heartbeat.ym
+            Set-Content heartbeat.yml
 
     #Runs the config test to make sure all data has been inputted correctly
     .\heartbeat.exe -e -configtest
