@@ -16,7 +16,7 @@ Heartbeat currently supports monitors for checking hosts via:
 1) As administrator, enter the following command in Powershell or download the zip file [here](https://github.com/vizion-elk/Heartbeat/archive/7.7.0.zip).
 
 ```
-Start-BitsTransfer -Source 'https://github.com/vizion-elk/Heartbeat/archive/7.7.0.zip' -Destination 'C:\Users\Administrator\Downloads\Heartbeat.zip'
+Start-BitsTransfer -Source "https://github.com/vizion-elk/Heartbeat/archive/7.7.0.zip" -Destination "${env:USERPROFILE}\Downloads\Heartbeat.zip"
 ```
 
 2) Unzip the package and extract the contents to the `C:/` drive.
