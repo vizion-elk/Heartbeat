@@ -1,6 +1,8 @@
 Set-ExecutionPolicy -ExecutionPolicy Undefined -Scope CurrentUser	
 Set-ExecutionPolicy -ExecutionPolicy Undefined -Scope LocalMachine
 Set-ExecutionPolicy -ExecutionPolicy Undefined -Scope Process
+Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force
+
 
 $principal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
 
@@ -8,13 +10,23 @@ if($principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) 
 
     "`nYou are running Powershell with full privilege`n"
 
-    Set-Location -Path 'c:\Heartbeat-master\heartbeat'
-    Set-ExecutionPolicy Unrestricted
+    # Change location to heartbeat
+    $currentLocation = Split-Path -Path $MyInvocation.MyCommand.Definition -Parent
+
+    If ( -Not (Test-Path -Path "$currentLocation\heartbeat") )
+    {
+        Write-Host -Object "Path $currentLocation\heartbeat does not exit, exiting..." -ForegroundColor Red
+        Exit 1
+    }
+    Else
+    {
+        Set-Location -Path "$currentLocation\heartbeat"
+    }
     
     "Heartbeat Execution policy set - Success`n"
 
     #=========== Filebeat Credentials Form ===========#
-    "`nAdding Heartbeat Credentials`n"
+    "Adding Heartbeat Credentials`n"
 
     #Pop-up Box that Adds Credentials 
     [void] [System.Reflection.Assembly]::LoadWithPartialName("System.Drawing") 
@@ -146,10 +158,12 @@ if($principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) 
             Set-Content heartbeat.yml
 
     #Runs the config test to make sure all data has been inputted correctly
-    .\heartbeat.exe -e -configtest
+    #.\heartbeat.exe -e -configtest
+    .\heartbeat.exe test config
+    .\heartbeat.exe test output
 
     #Load heartbeat Preconfigured Dashboards
-    .\heartbeat.exe setup --dashboards
+    .\heartbeat setup -e
 
     #Install heartbeat as a service
     .\install-service-heartbeat.ps1
@@ -163,7 +177,7 @@ if($principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) 
     "`nHeartbeat Started. Check Kibana For The Incoming Data!"
 
     #Close Powershell window
-    Stop-Process -Id $PID
+    #Stop-Process -Id $PID
 
 }
 else {
