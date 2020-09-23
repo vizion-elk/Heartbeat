@@ -13,21 +13,27 @@ Heartbeat currently supports monitors for checking hosts via:
 
 ### Windows:
 
-1) As administrator, enter the following command in Powershell or download the zip file [here](https://github.com/vizion-elk/Heartbeat/archive/7.7.0.zip).
+1) As administrator, enter the following command in Powershell or download the zip file [here](https://github.com/vizion-elk/Heartbeat/archive/6.5.4.zip).
 
 ```
-Start-BitsTransfer -Source "https://github.com/vizion-elk/Heartbeat/archive/7.7.0.zip" -Destination "${env:USERPROFILE}\Downloads\Heartbeat.zip"
+Start-BitsTransfer -Source "https://github.com/vizion-elk/Heartbeat/archive/6.5.4.zip" -Destination "${env:USERPROFILE}\Downloads\Heartbeat.zip"
 ```
 
 2) Unzip the package and extract the contents to the `C:/` drive.
 
-3) Back in Powershell, CD into the extracted folder and run the following script:
+3) Back in Powershell, CD into the extracted folder and run the following command:
+
+```
+Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force
+```
+
+4) then run the following script:
 
 ```
 .\installHeartbeat.ps1
 ```
 
-4) When prompted, enter your credentials below as well as the ```URL``` that you would like to monitor and click OK.
+5) When prompted, enter your credentials below as well as the ```URL``` that you would like to monitor and click OK.
 
 ```css
 Kibana URL: _PLACEHOLDER_KIBANA_URL_
